@@ -30,7 +30,6 @@
 
 /* --- YOUR IMPORTS GO HERE --- */
 
-
 // STEP 2: Create and export the App component
 // Use: export default function App() { ... }
 //
@@ -57,20 +56,23 @@
 import HeroSection from "./components/HeroSection";
 import FooterSection from "./components/FooterSection";
 import NavBar from "./components/NavBar";
- 
+import RibbonTicker from "./components/RibbonTicker";
+
 export default function App() {
     return (
         <div className="app">
             {/* NavBar */}
             <NavBar />
- 
+
             {/* HERO */}
             <section className="hero bg-hero">
                 <div className="hero-grid">
                     <HeroSection />
                 </div>
             </section>
- 
+
+            <RibbonTicker />
+
             {/* FOOTER */}
             <section className="bg-footer">
                 <FooterSection />
