@@ -144,7 +144,7 @@ const navigation = {
 
 const currentYear = new Date().getFullYear();
 
-/* Leaflet map component */
+/* ── Leaflet map component ── */
 function LocationMap() {
     const mapRef = useRef(null);
     const mapInstance = useRef(null);
@@ -160,8 +160,10 @@ function LocationMap() {
             zoom: 14,
             scrollWheelZoom: false,
             zoomControl: true,
-            attributeControl: true
+            attributionControl: true
         });
+
+        // Use a warm-toned tile layer
         L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
             attribution:
                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
@@ -169,15 +171,7 @@ function LocationMap() {
             maxZoom: 19
         }).addTo(map);
 
-        /* Custom Marker */
-
-        L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-            attribution:
-                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
-            subdomains: "abcd",
-            maxZoom: 19
-        }).addTo(map);
-
+        // Custom marker
         const icon = L.divIcon({
             className: "leaflet-map-pin",
             html: `<div style="
@@ -219,14 +213,14 @@ function LocationMap() {
 export default function FooterSection() {
     return (
         <footer className="footer">
-            <div className="mx-auto max-w-7x1 px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32 2x1:max-w-[1600px]">
-                {/* MAP */}
+            <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32 2xl:max-w-[1600px]">
+                {/* Map */}
                 <ScrollReveal animation="fadeUp">
                     <LocationMap />
                 </ScrollReveal>
 
-                {/* FOOTER COLUMNS */}
-                <div className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-4 ">
+                {/* Footer columns */}
+                <div className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-4">
                     <ScrollReveal animation="fadeUp" className="col-span-2 md:col-span-1 space-y-4">
                         <img
                             alt="The Beans Place Logo"
@@ -243,7 +237,7 @@ export default function FooterSection() {
                                     key={item.name}
                                     href={item.href}
                                     className="text-white/70 transition-colors hover:text-[var(--amber)] duration-200"
-                                    aira-label={item.name}>
+                                    aria-label={item.name}>
                                     <item.icon aria-hidden="true" className="size-6" />
                                 </a>
                             ))}
@@ -252,11 +246,10 @@ export default function FooterSection() {
 
                     <ScrollReveal animation="fadeUp" delay={0.1}>
                         <h4 className="footer-col">Shop</h4>
-
                         <ul role="list" className="footer-links mt-4">
                             {navigation.shop.map((item) => (
                                 <li key={item.name}>
-                                    <a href={item.href}></a>
+                                    <a href={item.href}>{item.name}</a>
                                 </li>
                             ))}
                         </ul>
