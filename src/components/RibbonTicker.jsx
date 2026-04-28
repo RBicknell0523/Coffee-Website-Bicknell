@@ -101,7 +101,7 @@ export default function RibbonTicker() {
                             transition={{ type: "spring", stiffness: 300 }}>
                             {name} <span className="ribbon-dot">+</span>
                         </motion.span>
-                    ))}
+                    )) }
                 </div>
             </div>
         </div>
