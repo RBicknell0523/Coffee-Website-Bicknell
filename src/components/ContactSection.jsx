@@ -236,6 +236,7 @@ const contactChannels = [
         href: "tel:+13035552326"
     }
 ];
+
 /* Tilt card with mouse tracking */
 function TiltCard({ children, className, href, target, rel }) {
     const ref = useRef(null);
@@ -315,7 +316,7 @@ function ContactFormInline() {
             onSubmit={handleSubmit}
             className="contact-form-card"
             initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}>
             {/* Form Header */}
@@ -364,7 +365,7 @@ function ContactFormInline() {
             </div>
 
             <div className="mt-4">
-                <TextArea
+                <Textarea
                     label="Message"
                     id="contact-message"
                     name="message"
@@ -377,7 +378,7 @@ function ContactFormInline() {
                 />
             </div>
 
-            <div className="mt-6" flex items-center gap-4>
+            <div className="mt-6 flex items-center gap-4">
                 <Button
                     type="submit"
                     variant="accent"
@@ -385,7 +386,7 @@ function ContactFormInline() {
                     className="contact-form-submit"
                     disabled={status === "sending"}>
                     {status === "sending" ? (
-                        <span className="fled items-center gap-2">
+                        <span className="flex items-center gap-2">
                             <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
                                 <circle
                                     className="opacity-25"
@@ -446,14 +447,15 @@ export default function ContactSection() {
         window.addEventListener("mousemove", handleMouseMove);
         return () => window.removeEventListener("mousemove", handleMouseMove);
     }, []);
+
     return (
         <div className="contact-section-wrap" ref={sectionRef}>
             {/* Background Effects */}
             <div className="contact-bg-effects">
-                <div className="cpmtact-bg-orb contact-bg-orb--1" />
-                <div className="cpmtact-bg-orb contact-bg-orb--1" />
-                <div className="cpmtact-bg-orb contact-bg-orb--1" />
-                <div className="cpmtact-bg-orb contact-bg-orb--1" />
+                <div className="contact-bg-orb contact-bg-orb--1" />
+                <div className="contact-bg-orb contact-bg-orb--2" />
+                <div className="contact-bg-orb contact-bg-orb--3" />
+                <div className="contact-bg-orb contact-bg-orb--4" />
             </div>
 
             <div className="contact-inner">
@@ -462,11 +464,11 @@ export default function ContactSection() {
                     <motion.div
                         className="contact-pill"
                         initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}>
-                        <span>✦ Connect & Collaborate </span>
+                        <span>✦ Connect & Collaborate</span>
                     </motion.div>
+
                     <h1 className="h1-stack" style={{ color: "var(--cream)" }}>
                         GET IN
                         <br />
@@ -475,17 +477,18 @@ export default function ContactSection() {
                         </span>
                     </h1>
 
-                    <p className="lead--light" style={{ maxWidthL: "52ch", margin: "10px auto 0" }}>
+                    <p className="lead--light" style={{ maxWidth: "52ch", margin: "10px auto 0" }}>
                         Whether you're ordering beans, planning an event, or just want to say hello
                         - we'd love to hear from you.
                     </p>
+
                     <Separator className="mt-4 mb-2 mx-auto max-w-48" />
                 </ScrollReveal>
 
                 {/* Two-Column: Form + Info Cards */}
                 <div className="contact-layout">
-                    {/* Left: Contact Form */}
-                    <div className="cpmtact-form-col">
+                    {/* Lef: Contact Form */}
+                    <div className="contact-form-col">
                         <ContactFormInline />
                     </div>
 
@@ -513,6 +516,9 @@ export default function ContactSection() {
                                             <div className="contact-card-content">
                                                 <div
                                                     className={`contact-card-icon bg-gradient-to-br ${channel.gradient}`}>
+                                                    {channel.icon}
+                                                </div>
+                                                <div className="contact-card-text">
                                                     <h3 className="contact-card-title">
                                                         {channel.name}
                                                     </h3>
@@ -535,6 +541,7 @@ export default function ContactSection() {
                                                     </svg>
                                                 </div>
                                             </div>
+
                                             <div className="contact-card-shimmer" />
                                         </div>
                                     </TiltCard>
